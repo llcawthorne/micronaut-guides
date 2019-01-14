@@ -1,0 +1,7 @@
+micronaut:
+    application:
+        name: commit-info
+endpoints:
+    info:
+        enabled: true
+        sensitive: false

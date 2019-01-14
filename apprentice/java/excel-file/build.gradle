@@ -1,0 +1,80 @@
+buildscript {
+    dependencies {
+        classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.4"
+    }
+}
+
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "com.github.johnrengelman.shadow" version "4.0.2"
+    id "net.ltgt.apt-eclipse" version "0.18"
+    id "net.ltgt.apt-idea" version "0.18"	
+}
+
+apply plugin:"application"
+apply plugin:"groovy"
+apply plugin:"com.energizedwork.webdriver-binaries"
+
+version "0.1"
+group "example.micronaut"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://jcenter.bintray.com" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.micronaut:micronaut-bom:1.0.2'
+    }
+}
+
+dependencies {
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    annotationProcessor "io.micronaut:micronaut-validation"
+    compile "io.micronaut:micronaut-inject"
+    compile "io.micronaut:micronaut-validation"
+    compile "io.micronaut:micronaut-runtime"
+    compile "io.micronaut:micronaut-http-client"
+    compile "io.micronaut:micronaut-http-server-netty"
+    compile 'builders.dsl:spreadsheet-builder-poi:1.0.5'
+    compile "io.micronaut:micronaut-views"
+    runtime "org.thymeleaf:thymeleaf:3.0.9.RELEASE"
+    compileOnly "io.micronaut:micronaut-inject-java"
+    runtime "ch.qos.logback:logback-classic:1.2.3"
+    testCompile "org.codehaus.groovy:groovy-all:2.5.2"
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile "org.gebish:geb-spock:2.2"
+    testCompile "org.seleniumhq.selenium:selenium-support:3.12.0"
+    testCompile "org.seleniumhq.selenium:selenium-remote-driver:3.12.0"
+    testCompile "org.seleniumhq.selenium:selenium-api:3.12.0"
+    testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:3.12.0"
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+webdriverBinaries {
+    chromedriver '2.41'
+    geckodriver '0.21.0'
+}
+
+tasks.withType(Test) {
+    systemProperty "geb.env", System.getProperty('geb.env')
+    systemProperty "download.folder", System.getProperty('download.folder')
+    beforeTest { descriptor -> logger.quiet " -- $descriptor" }
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat 'full'
+    }
+}
+
+run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
+
+mainClassName = "example.micronaut.Application"
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
+}

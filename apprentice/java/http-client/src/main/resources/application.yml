@@ -1,0 +1,9 @@
+micronaut:
+    application:
+        name: http-client
+bintray:
+    organization: micronaut
+    repository: profiles
+    apiversion: v1
+    username: llcawthorne
+    token: put_token_here
