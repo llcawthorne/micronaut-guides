@@ -1,0 +1,29 @@
+micronaut:
+    application:
+        name: ldap-database-auth
+    security:
+        enabled: true
+        endpoints:
+            login:
+                enabled: true
+            oauth:
+                enabled: true
+        token:
+            jwt:
+                enabled: true
+                signatures:
+                    secret:
+                        generator:
+                            secret: pleaseChangeThisSecretForANewOne
+        ldap:
+            default:
+                enabled: true
+                context:
+                    server: 'ldap://ldap.forumsys.com:389'
+                    managerDn: 'cn=read-only-admin,dc=example,dc=com'
+                    managerPassword: 'password'
+                search:
+                    base: "dc=example,dc=com"
+                groups:
+                    enabled: true
+                    base: "dc=example,dc=com"
