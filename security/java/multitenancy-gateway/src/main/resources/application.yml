@@ -1,0 +1,20 @@
+micronaut:
+    application:
+        name: multitenancy-gateway
+    server:
+        port: 8080
+    multitenancy:
+        propagation:
+            enabled: true
+            service-id-regex: 'books'
+        tenantresolver:
+            cookie:
+                enabled: true
+        tenantwriter:
+            httpheader:
+                enabled: true
+    http:
+        services:
+            books:
+                urls:
+                    - "http://localhost:8081"

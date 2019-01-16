@@ -1,0 +1,5 @@
+micronaut:
+    application:
+        name: consul-bookcatalogue
+    server:
+        port: 8081

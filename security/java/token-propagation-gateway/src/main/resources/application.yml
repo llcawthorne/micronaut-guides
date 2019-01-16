@@ -1,0 +1,30 @@
+micronaut:
+    application:
+        name: gateway
+    server:
+        port: 8080
+    security:
+        enabled: true
+        endpoints:
+            login:
+                enabled: true
+            oauth:
+                enabled: true
+        token:
+            jwt:
+                enabled: true
+                signatures:
+                    secret:
+                        generator:
+                            secret: pleaseChangeThisSecretForANewOne
+            writer:
+                header:
+                    enabled: true
+            propagation:
+                enabled: true
+                service-id-regex: "userecho"
+    http:
+        services:
+            userecho:
+                urls:
+                    - "http://localhost:8081"

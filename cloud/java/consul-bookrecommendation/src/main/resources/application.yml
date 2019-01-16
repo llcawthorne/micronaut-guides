@@ -1,0 +1,5 @@
+micronaut:
+    application:
+        name: consul-bookrecommendation
+    server:
+        port: 8080

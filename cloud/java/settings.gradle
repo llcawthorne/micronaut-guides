@@ -1,0 +1,3 @@
+include 'consul-bookcatalogue'
+include 'consul-bookinventory'
+include 'consul-bookrecommendation'
