@@ -4,7 +4,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.client.annotation.Client;
 import io.reactivex.Flowable;
 
-@Client("http://localhost:8081")
+@Client(id = "consul-bookcatalogue")
 public interface BookCatalogueClient extends BookCatalogueOperations {
 
     @Get("/books")

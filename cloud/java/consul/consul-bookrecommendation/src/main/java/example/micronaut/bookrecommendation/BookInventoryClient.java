@@ -6,7 +6,7 @@ import io.reactivex.Maybe;
 
 import javax.validation.constraints.NotBlank;
 
-@Client("http://localhost:8082")
+@Client(id = "consul-bookinventory")
 public interface BookInventoryClient extends BookInventoryOperations {
 
     @Get("/books/stock/{isbn}")

@@ -35,6 +35,7 @@ dependencies {
     compile "io.micronaut.configuration:micronaut-hibernate-validator"
     compileOnly "io.micronaut:micronaut-inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"
+    runtime "io.micronaut:micronaut-discovery-client"
     testCompile "junit:junit:4.12"
     testCompile "io.micronaut:micronaut-inject-java"
     testCompile "org.hamcrest:hamcrest-all:1.3"
@@ -46,7 +47,7 @@ shadowJar {
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
-mainClassName = "example.micronaut.Application"
+mainClassName = "example.micronaut.bookinventory.Application"
 
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
